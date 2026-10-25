@@ -42,7 +42,9 @@ jobs:
           packages: platform-tools
 
       - name: Install dependencies
-        run: npm ci
+        # npm install (not npm ci) so a hand-edited package.json still builds:
+        # it syncs the lock file instead of failing when they are out of sync.
+        run: npm install --no-audit --no-fund
 
       - name: Check before building
         run: |
